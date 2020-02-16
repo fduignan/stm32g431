@@ -202,7 +202,7 @@ void init()
 	unsigned char *src;
 	unsigned char *dest;
 	unsigned len;
-    //initClock();
+    initClock();
 	src= &INIT_DATA_VALUES;
 	dest= &INIT_DATA_START;
 	len= &INIT_DATA_END-&INIT_DATA_START;

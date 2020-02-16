@@ -8,10 +8,7 @@ void delay(uint32_t dly)
 void initClock();
 
 int main()
-{
-    
-    delay(10000000); // startup delay in case things go wrong with clock
-    initClock();
+{    
     RCC->AHB2ENR |= (1 << 0); // enable Port A    
     GPIOA->MODER &= ~(1 << 1); // Make bit 0 an output
     GPIOA->MODER |= (1 << 0);
