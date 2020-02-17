@@ -4,8 +4,8 @@
 void init(void);
 void Default_Handler(void);
 void Systick_Handler(void);
-void USART1_Handler(void);
-void Line_State_Handler(void);
+void USART2_Handler(void);
+
 int main(void);
 // The following are 'declared' in the linker script
 extern unsigned char  INIT_DATA_VALUES;
@@ -82,7 +82,7 @@ const fptr Vectors[] __attribute__((section(".vectors"))) ={
 	Default_Handler, 	/* 35: SPI1 */
 	Default_Handler, 	/* 36: SPI2 */
 	Default_Handler, 	/* 37: USART1 */
-	Default_Handler, 	/* 38: USART2 */
+	USART2_Handler, 	/* 38: USART2 */
 	Default_Handler, 	/* 39: USART3 */
 	Default_Handler, 	/* 40: EXTI15_10 */
 	Default_Handler, 	/* 41: RTC_ALARM */
@@ -149,7 +149,7 @@ const fptr Vectors[] __attribute__((section(".vectors"))) ={
 };
 void initClock()
 {
-        // After reset, CPU clock is set to HSISYS = 16MHz
+  // After reset, CPU clock is set to HSISYS = 16MHz
     
 // This is potentially a dangerous function as it could
 // result in a system with an invalid clock signal - result: a stuck system
