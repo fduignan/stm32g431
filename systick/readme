@@ -1,0 +1,1 @@
+Simple systick interrupt example which toggles GPIOA bit 0
