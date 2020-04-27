@@ -1719,7 +1719,7 @@ typedef struct {                                    /*!< CRS Structure          
 #define DAC4_BASE                       0x50001400UL
 #define ADC1_BASE                       0x50000000UL
 #define ADC2_BASE                       0x50000100UL
-#define ADC12_Common_BASE               0x50000200UL
+#define ADC12_Common_BASE               0x50000300UL // Mistake in SVD File corrected here.
 #define ADC345_Common_BASE              0x50000700UL
 #define FMAC_BASE                       0x40021400UL
 #define CORDIC_BASE                     0x40020C00UL
