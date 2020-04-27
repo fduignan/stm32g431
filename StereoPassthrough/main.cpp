@@ -128,20 +128,17 @@ void initADC()
     
     NVIC->ISER0 |= (1 << 18); // enable ADC interrupts in NVIC
     ADC1->CR |= (1 << 0);     // enable ADC
-    ADC2->CR |= (1 << 0);     // enable ADC
-    ADC1->CR |= (1 << 2);     // start sampling
-    ADC2->CR |= (1 << 2);     // start sampling
-
-    
+    ADC2->CR |= (1 << 2);     // start sampling    
 }
 
 void ADC_Handler()
 {    
     
+    static int count = 0;
     GPIOF->ODR |= 1; // drive port pin high         
     
     DAC1->DAC_DHR12R1 = ADC1->DR;
-    DAC1->DAC_DHR12R2 = ADC2->DR;
+    DAC1->DAC_DHR12R2 = count++;//ADC1->DR;//ADC2->DR;
     // The green LED output is used to measure the execution time of the ISR
         
     ADC1->ISR = (1 << 3) + (1 << 2);     // clear ADC interrupt flags

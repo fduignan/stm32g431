@@ -20,9 +20,15 @@ void initPorts()
     GPIOA->MODER |= (1 << 0);
 }
 
-
 void Systick_Handler()
-{  
+{ 
+    static uint32_t milliseconds = 0;
+    milliseconds++;
+    if (milliseconds == 1000)
+    {
+        milliseconds = 0;
+        
+    }
     GPIOA->ODR ^= 1; // toggle a port bit so sampling rate can be measured with an oscilloscope
     
 }

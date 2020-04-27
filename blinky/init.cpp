@@ -160,24 +160,22 @@ void initClock()
         
         // Warning here: if system clock is greater than 24MHz then wait-state(s) need to be
         // inserted into Flash memory interface
-        // If the chip is run at 160MHz then 7 wait states are required.
+        // If the chip is run at 170MHz then 7 wait states are required.
         // SysClock is taken from output R of the PLL.  It is divided by 2 by default so
         // should aim for 340MHz output from PLL
-        // 340 = 16 * 84 / 4 so N = 85; M = 4
-        FLASH->ACR |= 0xfffffff0;
+        // 340 = 16 * 85 / 4 so N = 85; M = 3 (note divisor = M+1)
+        FLASH->ACR &= 0xfffffff0;
         FLASH->ACR |= 7;        
         // Turn on FLASH prefetch buffer
         FLASH->ACR |= (1 << 8);
         // Set PLL input clock to 16MHz HSI clock
-        RCC->PLLSYSCFGR |= (1<<1);
-        // set PLL multiplier to 20 (yielding 160MHz)
+        RCC->PLLSYSCFGR |= (1<<1);        
         RCC->PLLSYSCFGR &= 0xffff80ff; // clear N bits
         RCC->PLLSYSCFGR |= (85 << 8);  // set N = 85;
         RCC->PLLSYSCFGR &= 0xffffff0f; // clear M bits
-        RCC->PLLSYSCFGR |= (4 << 4);  // set M = 4;
+        RCC->PLLSYSCFGR |= (3 << 4);  // set M = 4;
         RCC->PLLSYSCFGR |= (1 << 24); // enable R output
         
-
         // and turn the PLL back on again
         RCC->CR |= (1<<24);        
         // set PLL as system clock source 
