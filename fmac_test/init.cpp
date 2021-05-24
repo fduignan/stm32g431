@@ -5,7 +5,7 @@ void init(void);
 void Default_Handler(void);
 void Systick_Handler(void);
 void USART1_Handler(void);
-void Line_State_Handler(void);
+void ADC_Handler(void);
 int main(void);
 // The following are 'declared' in the linker script
 extern unsigned char  INIT_DATA_VALUES;
@@ -27,7 +27,7 @@ typedef void (*fptr)(void);
 #pragma GCC optimize ("O0")
 
 const fptr Vectors[] __attribute__((section(".vectors"))) ={
-	(fptr)0x20020000, 	/* Top of stack (128k) */ 
+	(fptr)0x20008000, 	/* Top of stack (32k) */ 
 	init,   		/* Reset Handler */
 	Default_Handler,	/* NMI */
 	Default_Handler,	/* Hard Fault */
@@ -42,7 +42,7 @@ const fptr Vectors[] __attribute__((section(".vectors"))) ={
 	Default_Handler,	/* Reserved */
 	Default_Handler,	/* Reserved */
 	Default_Handler,	/* PendSV */
-	Systick_Handler,	/* SysTick */	
+	Default_Handler,	/* SysTick */	
 /* External interrupt handlers follow */
 	Default_Handler, 	/* 0: WWDG */
 	Default_Handler, 	/* 1: PVD_PVM */
@@ -62,7 +62,7 @@ const fptr Vectors[] __attribute__((section(".vectors"))) ={
 	Default_Handler, 	/* 15: DMA1_CH5 */
 	Default_Handler, 	/* 16: DMA1_CH6 */
 	Default_Handler, 	/* 17: DMA1_CH7 */
-	Default_Handler, 	/* 18: ADC1_2 */
+	ADC_Handler, 	    /* 18: ADC1_2 */
 	Default_Handler, 	/* 19: USB_HP */
 	Default_Handler, 	/* 20: USB_LP */
 	Default_Handler, 	/* 21: fdcan1_intr1_it */

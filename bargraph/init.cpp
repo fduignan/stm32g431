@@ -27,7 +27,7 @@ typedef void (*fptr)(void);
 #pragma GCC optimize ("O0")
 
 const fptr Vectors[] __attribute__((section(".vectors"))) ={
-	(fptr)0x20020000, 	/* Top of stack (128k) */ 
+	(fptr)0x20008000, 	/* Top of stack (32k) */ 
 	init,   		/* Reset Handler */
 	Default_Handler,	/* NMI */
 	Default_Handler,	/* Hard Fault */
@@ -42,7 +42,7 @@ const fptr Vectors[] __attribute__((section(".vectors"))) ={
 	Default_Handler,	/* Reserved */
 	Default_Handler,	/* Reserved */
 	Default_Handler,	/* PendSV */
-	Systick_Handler,	/* SysTick */	
+	Default_Handler,	/* SysTick */	
 /* External interrupt handlers follow */
 	Default_Handler, 	/* 0: WWDG */
 	Default_Handler, 	/* 1: PVD_PVM */

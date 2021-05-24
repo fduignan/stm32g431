@@ -4,8 +4,8 @@
 void init(void);
 void Default_Handler(void);
 void Systick_Handler(void);
-void USART1_Handler(void);
-void Line_State_Handler(void);
+void USART2_Handler(void);
+
 int main(void);
 // The following are 'declared' in the linker script
 extern unsigned char  INIT_DATA_VALUES;
@@ -27,7 +27,7 @@ typedef void (*fptr)(void);
 #pragma GCC optimize ("O0")
 
 const fptr Vectors[] __attribute__((section(".vectors"))) ={
-	(fptr)0x20020000, 	/* Top of stack (128k) */ 
+	(fptr)0x20008000, 	/* Top of stack (32k) */ 
 	init,   		/* Reset Handler */
 	Default_Handler,	/* NMI */
 	Default_Handler,	/* Hard Fault */
@@ -42,7 +42,7 @@ const fptr Vectors[] __attribute__((section(".vectors"))) ={
 	Default_Handler,	/* Reserved */
 	Default_Handler,	/* Reserved */
 	Default_Handler,	/* PendSV */
-	Systick_Handler,	/* SysTick */	
+	Default_Handler,	/* SysTick */	
 /* External interrupt handlers follow */
 	Default_Handler, 	/* 0: WWDG */
 	Default_Handler, 	/* 1: PVD_PVM */
@@ -82,7 +82,7 @@ const fptr Vectors[] __attribute__((section(".vectors"))) ={
 	Default_Handler, 	/* 35: SPI1 */
 	Default_Handler, 	/* 36: SPI2 */
 	Default_Handler, 	/* 37: USART1 */
-	Default_Handler, 	/* 38: USART2 */
+	USART2_Handler, 	/* 38: USART2 */
 	Default_Handler, 	/* 39: USART3 */
 	Default_Handler, 	/* 40: EXTI15_10 */
 	Default_Handler, 	/* 41: RTC_ALARM */
